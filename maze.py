@@ -39,8 +39,8 @@ class Creature():
 		self.health = 1
 
 class Hero(Creature):
-	def __init__(self):
-		self.pos = array([0,0])
+	def __init__(self, pos):
+		Creature.__init__(self, pos)
 		self.health = 10
 		self.bombs = 3
 		self.bombcatch = False
@@ -87,7 +87,7 @@ class Hero(Creature):
 				self.bombs -= 1
 		self.bombcatch = False
 
-class pickup:
+class Pickup:
 	def __init__(self):
 		self.pos = array([random.randint(0, dungeonXSize),random.randint(0, dungeonYSize)])
 
@@ -100,7 +100,7 @@ class pickup:
 	def draw(self):
 		print "nothing here"
 
-class bomb_pickup(pickup):
+class BombPickup(Pickup):
 	image = pygame.image.load("gfx/bomb.png")
 	def get(self, other):
 		other.addbomb()
@@ -119,11 +119,11 @@ def playGame():
 	for f in tilefiles:
 		tiles.append(pygame.image.load(f))
 
-	itemtypes = [bomb_pickup]
+	itemtypes = [BombPickup]
 	items = []
 
 	dungeon = []
-	myhero = Hero()
+	myhero = Hero([0,0])
 	herotile = pygame.image.load("gfx/hero.png")
 	for i in xrange(dungeonXSize):
 		items.append(itemtypes[0]())
