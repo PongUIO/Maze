@@ -14,8 +14,9 @@ def inside(pos):
 		return False
 	return True
 
-def blitToWorld(tile, pos):
-	surf.blit(tile, (pos[0]*32, pos[1]*32))
+def updateWorld(tile, pos):
+	dungeon[pos[0]][pos[1]] = tile
+	surf.blit(tiles[tile], (pos[0]*32, pos[1]*32))
 
 def newpos(pos, e):
 	if e == pygame.K_UP:
@@ -82,8 +83,7 @@ class Hero(Creature):
 	def destroytile(self,pos):
 		if inside(pos):
 			if (self.bombs > 0):
-				dungeon[pos[0]][pos[1]] = 1
-				blitToWorld(tiles[1], pos)
+				updateWorld(1, pos)
 				self.bombs -= 1
 		self.bombcatch = False
 
