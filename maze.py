@@ -27,6 +27,7 @@ def newpos(pos, e):
 		return (pos+array([-1, 0]))
 	elif e == pygame.K_RIGHT:
 		return (pos+array([1,0]))
+	return None
 
 def passablepos(pos):
 	return passable[dungeon[pos[0]][pos[1]]]
